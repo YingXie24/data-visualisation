@@ -12,7 +12,9 @@ while True:
     # Plot the points in the walk.
     plt.style.use("classic")
     fig, ax = plt.subplots()
-    ax.scatter(rw.x_values, rw.y_values, s=5)
+    point_order = range(rw.num_points)
+    ax.scatter(rw.x_values, rw.y_values, c=point_order, cmap=plt.cm.Blues,
+               edgecolors="none", s=5)
 
     plt.show()
 
