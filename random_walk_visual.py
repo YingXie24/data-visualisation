@@ -24,7 +24,8 @@ while True:
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
 
-    plt.show()
+    # Save the plot to a file automatically.
+    plt.savefig("random_walk.png", bbox_inches="tight")
 
     keep_running = input("Make another walk? (y/n): ")
     if keep_running == 'n':
