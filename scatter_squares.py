@@ -20,4 +20,5 @@ ax.ticklabel_format(style="plain")
 # Set the range for each axis. 
 ax.axis([0, 1100, 0, 1100000])
 
-plt.show()
+# Save the plot to a file automatically.
+plt.savefig("square_plot.png", bbox_inches="tight")
