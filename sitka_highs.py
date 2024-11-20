@@ -29,6 +29,9 @@ with open(filename) as f:
     ax.plot(dates, highs, c="red")
     ax.plot(dates, lows, c="blue")
 
+    # Shade area between two y-value series.
+    ax.fill_between(dates, highs, lows, facecolor='red', alpha=0.2)
+
     # Format plot.
     ax.set_title("Daily high and low temperatures, 2018", fontsize=24)
     ax.set_xlabel('', fontsize=16)
