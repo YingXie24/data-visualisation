@@ -2,19 +2,23 @@ import csv
 from datetime import datetime
 import matplotlib.pyplot as plt
 
+def get_column_index(header_row, required_column_name):
+    """Get columnn index of required_column_name from header_row."""
+    for index, column_name in enumerate(header_row):
+        if column_name == required_column_name:
+            required_index = index
+    return required_index
+
+
 with open('data/death_valley_2018_simple.csv') as f:
     reader = csv.reader(f)
     header_row = next(reader)
 
-    for index, column_header in enumerate(header_row):
-        if column_header == 'TMAX':
-            index_high = index
-        if column_header == 'TMIN':
-            index_low = index
-        if column_header == "DATE":
-            index_date = index
-        if column_header == "NAME":
-            index_station = index
+    # Automate index of required rows.
+    index_station = get_column_index(header_row, 'NAME')
+    index_date = get_column_index(header_row, 'DATE')
+    index_high = get_column_index(header_row, 'TMAX')
+    index_low = get_column_index(header_row, 'TMIN')
 
     # Get dates and high temperatures from this file.
     dates, highs, lows = [], [], []
