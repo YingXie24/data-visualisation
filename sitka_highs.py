@@ -36,6 +36,7 @@ ax.fill_between(dates, highs, lows, facecolor='red', alpha=0.2)
 ax.set_title("Daily high and low temperatures, 2018", fontsize=24)
 ax.set_xlabel('', fontsize=16)
 ax.set_ylabel("Temperature (F)", fontsize=16)
+ax.set_ybound(0, 150)
 ax.tick_params(axis="both", which="major", labelsize=16)
 
 # Draw the date labels diagonally to prevent them from overlapping.
