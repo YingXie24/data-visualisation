@@ -6,13 +6,24 @@ with open('data/death_valley_2018_simple.csv') as f:
     reader = csv.reader(f)
     header_row = next(reader)
 
-# Get dates and high temperatures from this file.
+    for index, column_header in enumerate(header_row):
+        if column_header == 'TMAX':
+            index_high = index
+        if column_header == 'TMIN':
+            index_low = index
+        if column_header == "DATE":
+            index_date = index
+        if column_header == "NAME":
+            index_station = index
+
+    # Get dates and high temperatures from this file.
     dates, highs, lows = [], [], []
     for row in reader:
-        current_date = datetime.strptime(row[2], "%Y-%m-%d")
+        station_name  = row[index_station]
+        current_date = datetime.strptime(row[index_date], "%Y-%m-%d")
         try:
-            high = int(row[4])
-            low = int(row[5])
+            high = int(row[index_high])
+            low = int(row[index_low])
         except ValueError:
             print(f"Missing data for {current_date}")
         else:
@@ -26,12 +37,14 @@ plt.style.use("seaborn-v0_8-pastel")
 fig, ax = plt.subplots()
 ax.plot(dates, highs, c="red")
 ax.plot(dates, lows, c="blue")
+print(station_name)
 
 # Shade area between two y-value series.
 ax.fill_between(dates, highs, lows, facecolor='red', alpha=0.2)
 
 # Format plot.
-ax.set_title("Daily high and low temperatures, 2018\nDeath Valley, CA", fontsize=20)
+title = f"Daily high and low temperatures, 2018\n{station_name}"
+ax.set_title(title, fontsize=20)
 ax.set_xlabel('', fontsize=16)
 ax.set_ylabel("Temperature (F)", fontsize=16)
 ax.set_ybound(0, 150)
