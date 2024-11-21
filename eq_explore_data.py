@@ -9,5 +9,23 @@ with open(filename) as f:
 # with open(readable_file, 'w') as f:
 #     json.dump(all_eq_data, f, indent=4)
 
+# Make list of all earthquakes.
 all_eq_dicts = all_eq_data['features']
-print(len(all_eq_dicts))
+
+# Extract magnitudes.
+mags, lons, lats = [], [], []
+
+for eq_dict in all_eq_dicts:
+    mag = eq_dict['properties']['mag']
+    mags.append(mag)
+
+    lon = eq_dict['geometry']['coordinates'][0]
+    lons.append(lon)
+
+    lat = eq_dict['geometry']['coordinates'][1]
+    lats.append(lat)
+
+
+
+print(mags[:10])
+print(lons[:10])
